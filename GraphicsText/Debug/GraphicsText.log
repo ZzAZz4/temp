@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\esteb\source\repos\GraphicsText\GraphicsText\main.cpp(545,33): warning C4018: '<': signed/unsigned mismatch
+  GraphicsText.vcxproj -> C:\Users\esteb\source\repos\GraphicsText\Debug\GraphicsText.exe
