@@ -26,7 +26,7 @@ std::ostream& operator <<
 (std::ostream& os, const Battleship::Ship& s)
 {
 	os << "Ship({" << s.location.x << ' ' << s.location.y << "}, "
-		<< (s.direction == Geometry::Direction::Horizontal ? "H, " : "V, ")
+		<< (s.orientation == Geometry::Direction::Horizontal ? "H, " : "V, ")
 		<< s.length << ") ";
 	return os;
 }

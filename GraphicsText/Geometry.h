@@ -20,21 +20,22 @@ namespace Geometry
 {
 	namespace Direction
 	{
-		enum class type
+		enum class DirectionType
 		{
+			Null = -1,
 			Vertical = 0,
 			Horizontal = 1
 		};
 
-		static auto Vertical = type::Vertical;
-		static auto Horizontal = type::Horizontal;
+		static auto Vertical = DirectionType::Vertical;
+		static auto Horizontal = DirectionType::Horizontal;
 	}
 
 	struct Point
 	{
 		int x, y;
 
-		Point(int x, int y)
+		Point(int x = 0, int y = 0)
 			: x(x), y(y)
 		{}
 		static void swap(Point& P1, Point& P2)
@@ -47,8 +48,9 @@ namespace Geometry
 		Point& operator =	(Point other)
 		{
 			swap(*this, other);
+			return *this;
 		}
-		Point	operator +	(Point other) const
+		Point operator +	(Point other) const
 		{
 			other.x += x; other.y += y;
 			return other;

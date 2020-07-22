@@ -38,10 +38,13 @@ namespace Directory
 
 	struct Configuration
 	{
-		static Path inputPath;
-		static Path outputFile;
+		Path inputPath;
+		Path outputFile;
 	};
-	class  Encoder
+
+	Configuration configuration;
+
+	class Encoder
 	{
 		static inline const unordered_map<string, Instruction>
 			StrInstruction = {
@@ -170,7 +173,7 @@ namespace Directory
 				vector<File> processes;
 				auto temp_folder = fs::temp_directory_path();
 
-				for (const auto& entry : FilesOn(Configuration::inputPath))
+				for (const auto& entry : FilesOn(configuration.inputPath))
 					processes.push_back(entry);
 
 				if (processes.empty())
@@ -237,11 +240,11 @@ namespace Directory
 
 		struct Sender
 		{
-			queue<Message> queue;
+			static queue<Message> queue;
 
-			void writeFile(Message message)
+			static void writeFile(Message message)
 			{
-				std::ofstream file(Configuration::outputFile);
+				std::ofstream file(configuration.outputFile);
 				assert(file.is_open());
 
 				if (message.token.has_value())
@@ -252,11 +255,12 @@ namespace Directory
 
 				file.close();
 			}
-			void send(Message message)
+
+			static void send(Message message)
 			{
 				writeFile(message);
 			}
-			void enqueue(Message message)
+			static void enqueue(Message message)
 			{
 				queue.emplace(message);
 			}
